@@ -62,6 +62,7 @@ Next, scroll down to Environment Variables and replace the following Variables w
 1. `IMAGE_REPO` --> `sm-container-maskrcnn`
 2. `IMAGE_TAG` --> `torch`
 3. `trainscripts` --> `mask_r_cnn`
+4. `Dockerfile-smcontainer-tf` -- `Dockerfile`
 
 Note that the image has `trainscripts` but the variables in your Lambda environment may have `s3_train_script` -- you can replace `s3_train_script` with a variable called `trainscripts`.
 
