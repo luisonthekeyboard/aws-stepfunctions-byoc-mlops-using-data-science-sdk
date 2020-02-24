@@ -81,7 +81,14 @@ Give it a name, choose an instance type (ml.t2.large should be enough) and choos
 
 On the Permissions and Encryption section, choose "Create a new role" and in the "S3 buckets you specify" section that appears, choose "Any S3 Bucket". In production circumstances, we would be a lot more specific in this section, but for the purpose of this lab, our main concern is to ensure a seamless experience.
 
-Click "Create Role" and you should see a small box appear with "Success! You created an IAM role." and a link to the new IAM Role.
+Click "Create Role" and you should see a small box appear with "Success! You created an IAM role." and a link to the new IAM Role. Let's click that link to open IAM and add a few more Policies to this role.
+
+In the IAM tab that opens when you click this link, choose "Attach Policies" and search and attach the following policies:
+
+- IAMFullAccess
+- AmazonEC2ContainerRegistryFullAccess
+- AmazonS3FullAccess
+- AWSStepFunctionsFullAccess
 
 Go back to the Sagemaker window and continue with the Notebook creation process.
 
