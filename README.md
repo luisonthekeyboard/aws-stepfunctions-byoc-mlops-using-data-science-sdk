@@ -83,86 +83,6 @@ On the Permissions and Encryption section, choose "Create a new role" and in the
 
 Click "Create Role" and you should see a small box appear with "Success! You created an IAM role." and a link to the new IAM Role.
 
-Click the newly created IAM role and let's click on "Add Inline Policy", on the right-hand side.
-
-Switch to JSON view and paste the following policy:
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "sagemaker:CreateTransformJob",
-                "sagemaker:DescribeTransformJob",
-                "sagemaker:StopTransformJob",
-                "sagemaker:CreateTrainingJob",
-                "sagemaker:DescribeTrainingJob",
-                "sagemaker:StopTrainingJob",
-                "sagemaker:CreateHyperParameterTuningJob",
-                "sagemaker:DescribeHyperParameterTuningJob",
-                "sagemaker:StopHyperParameterTuningJob",
-                "sagemaker:CreateModel",
-                "sagemaker:CreateEndpointConfig",
-                "sagemaker:CreateEndpoint",
-                "sagemaker:DeleteEndpointConfig",
-                "sagemaker:DeleteEndpoint",
-                "sagemaker:UpdateEndpoint",
-                "sagemaker:ListTags",
-                "lambda:InvokeFunction",
-                "sqs:SendMessage",
-                "sns:Publish",
-                "ecs:RunTask",
-                "ecs:StopTask",
-                "ecs:DescribeTasks",
-                "dynamodb:GetItem",
-                "dynamodb:PutItem",
-                "dynamodb:UpdateItem",
-                "dynamodb:DeleteItem",
-                "batch:SubmitJob",
-                "batch:DescribeJobs",
-                "batch:TerminateJob",
-                "glue:StartJobRun",
-                "glue:GetJobRun",
-                "glue:GetJobRuns",
-                "glue:BatchStopJobRun"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "iam:PassRole"
-            ],
-            "Resource": "*",
-            "Condition": {
-                "StringEquals": {
-                    "iam:PassedToService": "sagemaker.amazonaws.com"
-                }
-            }
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "events:PutTargets",
-                "events:PutRule",
-                "events:DescribeRule"
-            ],
-            "Resource": [
-                "arn:aws:events:*:*:rule/StepFunctionsGetEventsForSageMakerTrainingJobsRule",
-                "arn:aws:events:*:*:rule/StepFunctionsGetEventsForSageMakerTransformJobsRule",
-                "arn:aws:events:*:*:rule/StepFunctionsGetEventsForSageMakerTuningJobsRule",
-                "arn:aws:events:*:*:rule/StepFunctionsGetEventsForECSTaskRule",
-                "arn:aws:events:*:*:rule/StepFunctionsGetEventsForBatchJobsRule"
-            ]
-        }
-    ]
-}
-```
-
-Click "Review Policy", give it a name such as `StepFunctionsWorkflowExecutionPolicy` and click "Create Policy".
-
 Go back to the Sagemaker window and continue with the Notebook creation process.
 
 Leave "Network", "Git Repositories" and "Tags" the way they are and click "Create Notebook Instance". Once the instance has been created, switch to the next step
@@ -172,20 +92,7 @@ Leave "Network", "Git Repositories" and "Tags" the way they are and click "Creat
 
 Click on "Open Jupyter" to open you environemnt and upload the notebook *StepFunctions_BYOC_Workflow.ipynb*.
 
-Click on the notebook to open it and continue from there.
-
--------------------------
-
-
-Next, Download the dataset to your local computer byt going here: https://www.cis.upenn.edu/~jshi/ped_html/ and scrolling down to *Step 4*.
-
-Unzip the dataset files and upload the data folder to your SageMaker notebook environment. 
-
-In order to run the workshop, you will need to ensure that Amazon SageMaker can call AWS StepFunctions, and that StepFunctions can call Model Training, Creation, and Deployment on behalf of SageMaker. 
-
-To ensure the correct IAM Persmissions, refer to the **Setup** section of the following notebook: https://github.com/awslabs/amazon-sagemaker-examples/blob/master/step-functions-data-science-sdk/machine_learning_workflow_abalone/machine_learning_workflow_abalone.ipynb.
-
-Once the appropriate setup is complete, run through the *StepFunctions_BYOC_Workflow.ipynb*. Open up the StepFunctions Console to watch the individual steps in the graph getting executed.
+Click on the notebook to open it and continue from there, running through the *StepFunctions_BYOC_Workflow.ipynb*. Open up the StepFunctions Console to watch the individual steps in the graph getting executed.
 
 ![](media/SFgraph.png)
 
