@@ -34,11 +34,22 @@ def upload_folder(bucket, folder_name):
             for file in files:
                 print(os.path.join(path, file))
                 s3_client.upload_file(os.path.join(path, file), bucket, file)
+
                 
+def repository_exists():
+    try:
+        response = ecr_client.describe_repositories(repositoryNames=[reponame])
+    except ClientError as err:
+        code = err.response['Error'].get('Code', 'Unknown')
+        if code == 'RepositoryNotFoundException':
+            return False
+    
+    return True
+
 
 def lambda_handler(event, context):
     #try deleting existing repository 
-    if os.environ['repositoryexists']=='yes':
+    if repository_exists() or os.environ['repositoryexists']=='yes':
         print("Existing repository with name {}, not recreating".format(project))
         print(ecr_client.describe_repositories(repositoryNames=[reponame]))
     else:
