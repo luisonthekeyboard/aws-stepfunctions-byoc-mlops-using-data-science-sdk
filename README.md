@@ -20,6 +20,10 @@ This will incur a cost of $0.38 for training the model.
 
 # Step 1: Deploy this CloudFormation template
 
+**Note:** Start by opening Cloudformation in your console, it could be that you already have a template created and ready, with the name `mod-HASH-NUMBER`. If that's the case, head out to the "Outputs" section and note the LambdaFunctionARN, LambdaFunctionName and LambdaRoleARN, as you'll need these later on in the lab, and you can proceed to Step 2.
+
+Otherwise, continue below.
+
 This Cloudformation template creates a Lambda function with a sample Dockerfile that launches a Codebuild job
 to build a Sagemaker specific container. 
 
@@ -61,8 +65,9 @@ Next, scroll down to Environment Variables and replace the following Variables w
 
 1. `IMAGE_REPO` --> `sm-container-maskrcnn`
 2. `IMAGE_TAG` --> `torch`
-3. `trainscripts` --> `mask_r_cnn`
-4. `Dockerfile-smcontainer-tf` -- `Dockerfile`
+3. `dockerfilename` -- `Dockerfile`
+
+Finally, change the key called `s3_train_script` to be `trainscripts` and change its value to be `mask_r_cnn`.
 
 ![](media/lambdaenv.png)
 
@@ -90,12 +95,12 @@ In the IAM tab that opens when you click this link, choose "Attach Policies" and
 
 Go back to the Sagemaker window and continue with the Notebook creation process.
 
-Leave "Network", "Git Repositories" and "Tags" the way they are and click "Create Notebook Instance". Once the instance has been created, switch to the next step
+Leave "Root access", "Network", "Git Repositories" and "Tags" the way they are and click "Create Notebook Instance". Once the instance has been created, switch to the next step
 
 
 # Step 5: Upload Notebook and dataset
 
-Click on "Open Jupyter" to open you environemnt and upload the notebook *StepFunctions_BYOC_Workflow.ipynb*.
+Click on "Open Jupyter" to open you environment and upload the notebook *StepFunctions_BYOC_Workflow.ipynb*.
 
 Click on the notebook to open it and continue from there, running through the *StepFunctions_BYOC_Workflow.ipynb*. Open up the StepFunctions Console to watch the individual steps in the graph getting executed.
 
