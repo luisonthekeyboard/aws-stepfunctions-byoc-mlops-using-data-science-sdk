@@ -39,7 +39,7 @@ Currently, this library is used by the following containers: TensorFlow Script M
 
 # Step 2: Clone this repo to your home directory
 ```bash
-git clone https://github.com/aws-samples/aws-stepfunctions-byoc-mlops-using-data-science-sdk.git
+git clone https://github.com/luisonthekeyboard/aws-stepfunctions-byoc-mlops-using-data-science-sdk.git
 ```
 
 # Step 3: Compress your code into a deployment package
